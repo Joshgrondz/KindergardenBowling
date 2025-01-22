@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class TeamManagement {
 
@@ -17,7 +18,7 @@ public class TeamManagement {
 
     // Method to remove a player by name
     public void removePlayer(String name) {
-        players.removeIf(player -> player.getName().equalsIgnoreCase(name));
+        players.removeIf(player -> player.getPlayerName().equalsIgnoreCase(name));
         System.out.println(name + " removed from the team (if they existed).");
     }
 
