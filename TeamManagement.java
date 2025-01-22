@@ -34,4 +34,12 @@ public class TeamManagement {
         }
     }
 
+    public void updateScore(String playerName, int newScore) {
+        for (Player player : players) {
+            if (player.getPlayerName().equals(playerName)) {
+                player.changeScore(newScore);
+                break; // Exit the loop once the player is found and updated
+            }
+        }
+    }
 }
