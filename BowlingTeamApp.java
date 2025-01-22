@@ -1,98 +1,62 @@
-// public class BowlingTeamApp {
-    
-    
-// public void addPlayer(){
-
-// }
-// public void removePlayer(){
-
-// }
-
-// public void loopedMenu(int n){
-
-//     for (int i =0; i<n ; i++){
-      
-        
-//         double scores = 0.0;
-//         for (int j =0; i<n ; i++){        
-//             System.out.println("Player score is:" + scores);
-//     }
-//   }
-// }
-
-// }
+import java.util.Scanner;
 
 public class BowlingTeamApp {
 
-    // Players' names and scores
-    private String[] playerNames = {"Alice", "Bob", "Charlie"};
-    private int[] playerScores = {120, 150, 180};
-
-    // Add a new player (add player at the end)
-    private void addPlayer(String name, int score) {
-        for (int i = 0; i < playerNames.length; i++) {
-            if (playerNames[i] == null) {
-                playerNames[i] = name;
-                playerScores[i] = score;
-                return;
-            }
-        }
-    }
-
-    // Remove a player
-    private void removePlayer(String name) {
-        for (int i = 0; i < playerNames.length; i++) {
-            if (playerNames[i] != null && playerNames[i].equals(name)) {
-                playerNames[i] = null;
-                playerScores[i] = 0;
-                return;
-            }
-        }
-    }
-
-    // View all players and scores
-    private void viewPlayers() {
-        for (int i = 0; i < playerNames.length; i++) {
-            if (playerNames[i] != null) {
-                System.out.println(playerNames[i] + ": " + playerScores[i]);
-            }
-        }
-    }
-
-    // Update a player's score
-    private void updateScore(String name, int newScore) {
-        for (int i = 0; i < playerNames.length; i++) {
-            if (playerNames[i] != null && playerNames[i].equals(name)) {
-                playerScores[i] = newScore;
-                return;
-            }
-        }
-    }
-
-    // Run the app with hardcoded actions
-    public void run() {
-        // View players before any changes
-        System.out.println("Initial players:");
-        viewPlayers();
-
-        // Adding a player
-        addPlayer("David", 200);
-        System.out.println("\nAfter adding David:");
-        viewPlayers();
-
-        // Updating Bob's score
-        updateScore("Bob", 160);
-        System.out.println("\nAfter updating Bob's score:");
-        viewPlayers();
-
-        // Removing Alice
-        removePlayer("Alice");
-        System.out.println("\nAfter removing Alice:");
-        viewPlayers();
-    }
-
-    // Main method to run the app
     public static void main(String[] args) {
-        new BowlingTeamApp().run();
+        Scanner scanner = new Scanner(System.in); // For reading user input
+        TeamManagement team = new TeamManagement();
+
+        while (true) {
+            // Display menu options
+            System.out.println("\nMenu:");
+            System.out.println("1. Add Player");
+            System.out.println("2. Update Player Score");
+            System.out.println("3. Remove Player");
+            System.out.println("4. View Players");
+            System.out.println("q. Quit");
+            System.out.print("Enter your choice: ");
+
+            // Read user input
+            String choice = scanner.nextLine();
+
+            if (choice.equals("q")) {
+                System.out.println("Exiting program.");
+                break;  // Exit the loop and the program
+            }
+
+            switch (choice) {
+                case "1": // Add Player
+                    System.out.print("Enter player's name: ");
+                    String nameToAdd = scanner.nextLine();
+                    System.out.print("Enter player's score: ");
+                    int scoreToAdd = Integer.parseInt(scanner.nextLine());
+                    team.addPlayer(nameToAdd, scoreToAdd);
+                    break;
+
+                case "2": // Update Player Score
+                    System.out.print("Enter player's name to update score: ");
+                    String nameToUpdate = scanner.nextLine();
+                    System.out.print("Enter new score: ");
+                    int newScore = Integer.parseInt(scanner.nextLine());
+                    team.updateScore(nameToUpdate, newScore);
+                    break;
+
+                case "3": // Remove Player
+                    System.out.print("Enter player's name to remove: ");
+                    String nameToRemove = scanner.nextLine();
+                    team.removePlayer(nameToRemove);
+                    break;
+
+                case "4": // View Players
+                    System.out.println("\nCurrent Players:");
+                    team.displayPlayers();
+                    break;
+
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        }
+
+        scanner.close(); // Close the scanner when done
     }
 }
